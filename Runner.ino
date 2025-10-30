@@ -32,20 +32,31 @@ MPU6500_WE myMPU6500 = MPU6500_WE(&SPI, csPin, useSPI);
 /* Use this one if you want to change the default SPI pins (only for ESP32 / STM32 so far): */
 // MPU6500_WE myMPU6500 = MPU6500_WE(&SPI, csPin, mosiPin, misoPin, sckPin, useSPI, true);
 
+int connectTries = 5;
 
 void setup() {
   Serial.begin(38400);
-  if (!myMPU6500.init()) {
-    Serial.println("MPU6500 does not respond");
-  } else {
-    Serial.println("MPU6500 is connected");
+  for(int i = 0; i < connectTries; i++){
+    if (!myMPU6500.init()) {
+      Serial.println("MPU6500 does not respond. Retrying in 3 seconds...");
+      if(i == (connectTries - 1)){
+        // for-loop just in case this if check doesn't work
+        Serial.println("ERROR: Connection to MPU6500 not found after 5 tries. MPU6500 will remain inactive. Continuing with default data...");
+        break;
+      }
+    } else {
+      Serial.println("MPU6500 is connected");
+      break;
+    }
+    delay(3000);
   }
+  
 
   /* Choose the SPI clock speed, default is 8 MHz 
      This function must be used only after init(), not before */
   //myMPU9250.setSPIClockSpeed(4000000);
 
-  Serial.println("Position you MPU6500 flat and don't move it - calibrating...");
+  Serial.println("Position your MPU6500 flat and don't move it - calibrating...");
   delay(1000);
   myMPU6500.autoOffsets();
   Serial.println("Done!");
@@ -60,8 +71,8 @@ void setup() {
   myMPU6500.setAccRange(MPU6500_ACC_RANGE_2G);
   myMPU6500.enableAccDLPF(true);
   myMPU6500.setAccDLPF(MPU6500_DLPF_6);
-  //myMPU6500.enableAccAxes(MPU6500_ENABLE_XYZ);
-  //myMPU6500.enableGyrAxes(MPU6500_ENABLE_XYZ);
+  //myMPU6500.enableAccAxes(MPU6500_ENABLE_XYZ); // this is the default value
+  //myMPU6500.enableGyrAxes(MPU6500_ENABLE_XYZ); // this is the default value
 
   // Calibrating the sensors for different bend ranges
   while (millis() < 11000) {

@@ -3,34 +3,41 @@
 * This file will have functions to match sensor values to letters
 **************************************/
 
-// Data ranges, calibrated in setup
+// ************************************
+// * Flex sensor data ranges, calibration and range convertor
+// ************************************
 
-int FLEX_PIN1 = A0;
-int flexADC1 = 0;
-int sensorMin1 = 1023;
-int sensorMax1 = 0;
+// Data ranges, calibrated in next function
 
-int FLEX_PIN2 = A1;
-int flexADC2 = 0;
-int sensorMin2 = 1023;
-int sensorMax2 = 0;
+const int expectedMin = 0;    // (1 <<  0 - 1)
+const int expectedMax = 1023; // (1 << 10 - 1)
 
-int FLEX_PIN3 = A2;
-int flexADC3 = 0;
-int sensorMin3 = 1023;
-int sensorMax3 = 0;
+const int FLEX_PIN1 = A0; // pin #
+int flexADC1 = 0;         // Variable storing analogRead data
+int sensorMin1 = 1023;    // HIGHEST resistance in range
+int sensorMax1 = 0;       // LOWEST resistance in range
 
-int FLEX_PIN4 = A3;
-int flexADC4 = 0;
-int sensorMin4 = 1023;
-int sensorMax4 = 0;
+const int FLEX_PIN2 = A1; // pin #
+int flexADC2 = 0;         // Variable storing analogRead data
+int sensorMin2 = 1023;    // HIGHEST resistance in range
+int sensorMax2 = 0;       // LOWEST resistance in range
 
-int FLEX_PIN5 = A4;
-int flexADC5 = 0;
-int sensorMin5 = 1023;
-int sensorMax5 = 0;
+const int FLEX_PIN3 = A2; // pin #
+int flexADC3 = 0;         // Variable storing analogRead data
+int sensorMin3 = 1023;    // HIGHEST resistance in range
+int sensorMax3 = 0;       // LOWEST resistance in range
 
-// Calibrates the min/max range of flex sensors. To be run for 10 secs during startup
+const int FLEX_PIN4 = A3; // pin #
+int flexADC4 = 0;         // Variable storing analogRead data
+int sensorMin4 = 1023;    // HIGHEST resistance in range
+int sensorMax4 = 0;       // LOWEST resistance in range
+
+const int FLEX_PIN5 = A4; // pin #
+int flexADC5 = 0;         // Variable storing analogRead data
+int sensorMin5 = 1023;    // HIGHEST resistance in range
+int sensorMax5 = 0;       // LOWEST resistance in range
+
+// Calibrates the min/max range of flex sensors. To be run several times for 10 secs during startup
 void readMinMax() {
   flexADC1 = analogRead(FLEX_PIN1);
   flexADC2 = analogRead(FLEX_PIN2);
@@ -73,3 +80,20 @@ void readMinMax() {
     sensorMax4 = flexADC4;
   }
 }
+
+// !!! THIS FUNCTION MODIFIES THE flexADC VARIABLES !!!
+void remapFlexValues(){
+  flexADC1 = map(sensorMin1, sensorMax1, expectedMin, expectedMax);
+  flexADC2 = map(sensorMin2, sensorMax2, expectedMin, expectedMax);
+  flexADC3 = map(sensorMin3, sensorMax3, expectedMin, expectedMax);
+  flexADC4 = map(sensorMin4, sensorMax4, expectedMin, expectedMax);
+  flexADC5 = map(sensorMin5, sensorMax5, expectedMin, expectedMax);
+}
+
+// ************************************
+// *
+// ************************************
+
+// Expected range of values for each letter
+// NOTE: the flex values MUST be remapped before this
+
