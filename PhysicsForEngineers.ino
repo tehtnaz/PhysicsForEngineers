@@ -3,6 +3,18 @@
 * This file will have functions to match sensor values to letters
 **************************************/
 
+// Libraries & MPU6500 definition
+
+#include <MPU6500_WE.h>
+#include "structs.h"
+
+const int csPin = 10;     // Chip Select Pin
+const bool useSPI = true; // SPI use flag
+/* There are two constructors for SPI: */
+MPU6500_WE myMPU6500 = MPU6500_WE(&SPI, csPin, useSPI);
+/* Use this one if you want to change the default SPI pins (only for ESP32 / STM32 so far): */
+// MPU6500_WE myMPU6500 = MPU6500_WE(&SPI, csPin, mosiPin, misoPin, sckPin, useSPI, true);
+
 // ************************************
 // * Flex sensor data ranges, calibration and range convertor
 // ************************************
@@ -83,17 +95,51 @@ void readMinMax() {
 
 // !!! THIS FUNCTION MODIFIES THE flexADC VARIABLES !!!
 void remapFlexValues(){
-  flexADC1 = map(sensorMin1, sensorMax1, expectedMin, expectedMax);
-  flexADC2 = map(sensorMin2, sensorMax2, expectedMin, expectedMax);
-  flexADC3 = map(sensorMin3, sensorMax3, expectedMin, expectedMax);
-  flexADC4 = map(sensorMin4, sensorMax4, expectedMin, expectedMax);
-  flexADC5 = map(sensorMin5, sensorMax5, expectedMin, expectedMax);
+  flexADC1 = map(flexADC1, sensorMin1, sensorMax1, expectedMin, expectedMax);
+  flexADC2 = map(flexADC2, sensorMin2, sensorMax2, expectedMin, expectedMax);
+  flexADC3 = map(flexADC3, sensorMin3, sensorMax3, expectedMin, expectedMax);
+  flexADC4 = map(flexADC4, sensorMin4, sensorMax4, expectedMin, expectedMax);
+  flexADC5 = map(flexADC5, sensorMin5, sensorMax5, expectedMin, expectedMax);
 }
 
 // ************************************
-// *
+// * Letter finding data & functions
 // ************************************
 
 // Expected range of values for each letter
 // NOTE: the flex values MUST be remapped before this
 
+const LetterFlexRange rangeA = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeB = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeC = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeD = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeE = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeF = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeG = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeH = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeI = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeJ = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeK = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeL = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeM = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeN = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeO = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeP = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeQ = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeR = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeS = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeT = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeU = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeV = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeW = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeX = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeY = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeZ = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+
+bool doesSensorMatchLetter(LetterFlexRange letterRange){
+  return flexADC1 < letterRange.flexMax1 && flexADC1 > letterRange.flexMin1 &&
+        flexADC2 < letterRange.flexMax2 && flexADC2 > letterRange.flexMin2 &&
+        flexADC3 < letterRange.flexMax3 && flexADC3 > letterRange.flexMin3 &&
+        flexADC4 < letterRange.flexMax4 && flexADC4 > letterRange.flexMin4 &&
+        flexADC5 < letterRange.flexMax5 && flexADC5 > letterRange.flexMin5;
+}

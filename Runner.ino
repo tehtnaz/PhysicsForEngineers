@@ -17,21 +17,6 @@
 * 
 ***************************************************************************/
 
-#include <MPU6500_WE.h>
-
-const int csPin = 10;    // Chip Select Pin
-const int mosiPin = 11;  // "MOSI" Pin
-const int misoPin = 12;  // "MISO" Pin
-const int sckPin = 13;   // SCK Pin
-bool useSPI = true;      // SPI use flag
-
-
-/* There are two constructors for SPI: */
-MPU6500_WE myMPU6500 = MPU6500_WE(&SPI, csPin, useSPI);
-
-/* Use this one if you want to change the default SPI pins (only for ESP32 / STM32 so far): */
-// MPU6500_WE myMPU6500 = MPU6500_WE(&SPI, csPin, mosiPin, misoPin, sckPin, useSPI, true);
-
 int connectTries = 5;
 
 void setup() {
