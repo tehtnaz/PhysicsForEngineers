@@ -115,32 +115,34 @@ void readAndRemapFlexValues(){
 // Expected range of values for each letter
 // NOTE: the flex values MUST be remapped before this
 
-const LetterFlexRange rangeA = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeB = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeC = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeD = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeE = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeF = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeG = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeH = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeI = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeJ = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeK = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeL = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeM = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeN = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeO = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeP = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeQ = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeR = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeS = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeT = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeU = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeV = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeW = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeX = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeY = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
-const LetterFlexRange rangeZ = {0, 1023, 0, 1023, 0, 1023, 0, 1023, 0, 1023};
+const LetterFlexRange rangeA = {0,   100,  900, 1023, 900, 1023, 900, 1023, 900, 1023};
+const LetterFlexRange rangeB = {200, 1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeC = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeD = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeE = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeF = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeG = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeH = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeI = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeJ = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023}; // read from acc aswell
+const LetterFlexRange rangeK = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeL = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeM = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeN = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeO = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeP = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeQ = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeR = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeS = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeT = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeU = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeV = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeW = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeX = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeY = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+const LetterFlexRange rangeZ = {0,   1023, 0,   1023, 0,   1023, 0,   1023, 0,   1023};
+
+const LetterXYZRange accRange;
 
 bool doesSensorMatchLetter(LetterFlexRange letterRange){
   return flexADC1 < letterRange.flexMax1 && flexADC1 > letterRange.flexMin1 &&

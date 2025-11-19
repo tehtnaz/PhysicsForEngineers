@@ -17,6 +17,13 @@ struct LetterFlexRange{
   int flexMin5;
   int flexMax5;
 };
+
+// Struct for combining accepted flex ranges for each letter
+struct LetterXYZRange{
+  xyzFloat minimumRange;
+  xyzFloat maximumRange;
+};
+
 #define PFE_STRUCTS
 
 #endif
