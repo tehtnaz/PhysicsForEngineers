@@ -125,19 +125,25 @@ void setup() {
 }
 
 
+uint32_t masksOverTime = 0;
+unsigned long lastMillis = 0;
+
+
 void loop() {
-  xyzFloat gValue = myMPU6500.getGValues();
-  xyzFloat gyr = myMPU6500.getGyrValues();
-  float temp = myMPU6500.getTemperature();
-  float resultantG = myMPU6500.getResultantG(gValue);
+  lastMillis = millis();
+  masksOverTime = 0;
+  while(millis() < (lastMillis + 1000)){
+    GetMPU7600Data();
+    readAndRemapFlexValues();
+    masksOverTime |= matchAllMasks();
+  }
+
   Serial.println("Acceleration in g (x,y,z):");
   Serial.print(gValue.x);
   Serial.print("   ");
   Serial.print(gValue.y);
   Serial.print("   ");
   Serial.println(gValue.z);
-  Serial.print("Resultant g: ");
-  Serial.println(resultantG);
 
   Serial.println("Gyroscope data in degrees/s: ");
   Serial.print(gyr.x);
@@ -145,8 +151,6 @@ void loop() {
   Serial.print(gyr.y);
   Serial.print("   ");
   Serial.println(gyr.z);
-
-  readAndRemapFlexValues();
 
   Serial.print("1: ");
   Serial.println(flexADC1);
@@ -159,7 +163,12 @@ void loop() {
   Serial.print("5: ");
   Serial.println(flexADC5);
 
-  Serial.println("********************************************");
 
-  delay(1000);
+  Serial.println(letterBitMask);
+  Serial.println(accBitMask);
+  Serial.println(gyroBitMask);
+
+  Serial.println(masksOverTime);
+
+  Serial.println("********************************************");
 }
