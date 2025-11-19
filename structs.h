@@ -1,5 +1,5 @@
 #ifndef PFE_STRUCTS
-
+#include <MPU6500_WE.h>
 // Struct for combining accepted flex ranges for each letter
 struct LetterFlexRange{
   int flexMin1;

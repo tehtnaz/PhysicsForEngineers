@@ -19,8 +19,8 @@
 
 int connectTries = 5;
 
-void setup() {
-  Serial.begin(38400);
+// Initialize/config mpu6500 & calibrate gyroscope
+void setupMPU6500(){
   for(int i = 0; i < connectTries; i++){
     if (!myMPU6500.init()) {
       Serial.println("MPU6500 does not respond. Retrying in 3 seconds...");
@@ -35,8 +35,6 @@ void setup() {
     }
     delay(3000);
   }
-  
-
   /* Choose the SPI clock speed, default is 8 MHz 
      This function must be used only after init(), not before */
   //myMPU9250.setSPIClockSpeed(4000000);
@@ -59,10 +57,71 @@ void setup() {
   //myMPU6500.enableAccAxes(MPU6500_ENABLE_XYZ); // this is the default value
   //myMPU6500.enableGyrAxes(MPU6500_ENABLE_XYZ); // this is the default value
 
+}
+
+void setup() {
+  pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
+  pinMode(A2, INPUT);
+  pinMode(A3, INPUT);
+  pinMode(A4, INPUT);
+  Serial.begin(9600);
+  setupMPU6500();
+  Serial.println("Calibrating sensor range");
   // Calibrating the sensors for different bend ranges
   while (millis() < 11000) {
-    readMinMax();
+    // millis bc im lazy and dont wanna hog memory
+    // we generally either shouldnt care about an extra second of calibration or should notice the extra time taken to connect mpu6500
+    calibrateMinMax();
   }
+  Serial.print("1: ");
+  Serial.println(sensorMin1);
+  Serial.print("2: ");
+  Serial.println(sensorMin2);
+  Serial.print("3: ");
+  Serial.println(sensorMin3);
+  Serial.print("4: ");
+  Serial.println(sensorMin4);
+  Serial.print("5: ");
+  Serial.println(sensorMin5);
+
+  Serial.print("1: ");
+  Serial.println(sensorMax1);
+  Serial.print("2: ");
+  Serial.println(sensorMax2);
+  Serial.print("3: ");
+  Serial.println(sensorMax3);
+  Serial.print("4: ");
+  Serial.println(sensorMax4);
+  Serial.print("5: ");
+  Serial.println(sensorMax5);
+  bool sensorFatal = false;
+  if(sensorMin1 == sensorMax1){
+    Serial.println("ERROR - FATAL: NO INPUT detected on Thumb (A0)!");
+    sensorFatal = true;
+  }
+  if(sensorMin2 == sensorMax2){
+    Serial.println("ERROR - FATAL: NO INPUT detected on Index (A1)!");
+    sensorFatal = true;
+  }
+  if(sensorMin3 == sensorMax3){
+    Serial.println("ERROR - FATAL: NO INPUT detected on Middle (A2)!");
+    sensorFatal = true;
+  }
+  if(sensorMin4 == sensorMax4){
+    Serial.println("ERROR - FATAL: NO INPUT detected on Ring (A3)!");
+    sensorFatal = true;
+  }
+  if(sensorMin5 == sensorMax5){
+    Serial.println("ERROR - FATAL: NO INPUT detected on Pinky (A4)!");
+    sensorFatal = true;
+  }
+  if(sensorFatal){
+    delay(60000);
+  }
+
+  
+  delay(5000);
 }
 
 
@@ -71,7 +130,6 @@ void loop() {
   xyzFloat gyr = myMPU6500.getGyrValues();
   float temp = myMPU6500.getTemperature();
   float resultantG = myMPU6500.getResultantG(gValue);
-
   Serial.println("Acceleration in g (x,y,z):");
   Serial.print(gValue.x);
   Serial.print("   ");
@@ -88,8 +146,18 @@ void loop() {
   Serial.print("   ");
   Serial.println(gyr.z);
 
-  Serial.print("Temperature in °C: ");
-  Serial.println(temp);
+  readAndRemapFlexValues();
+
+  Serial.print("1: ");
+  Serial.println(flexADC1);
+  Serial.print("2: ");
+  Serial.println(flexADC2);
+  Serial.print("3: ");
+  Serial.println(flexADC3);
+  Serial.print("4: ");
+  Serial.println(flexADC4);
+  Serial.print("5: ");
+  Serial.println(flexADC5);
 
   Serial.println("********************************************");
 

@@ -50,7 +50,7 @@ int sensorMin5 = 1023;    // HIGHEST resistance in range
 int sensorMax5 = 0;       // LOWEST resistance in range
 
 // Calibrates the min/max range of flex sensors. To be run several times for 10 secs during startup
-void readMinMax() {
+void calibrateMinMax() {
   flexADC1 = analogRead(FLEX_PIN1);
   flexADC2 = analogRead(FLEX_PIN2);
   flexADC3 = analogRead(FLEX_PIN3);
@@ -75,14 +75,7 @@ void readMinMax() {
     sensorMin3 = flexADC3;
   }
   if (flexADC3 > sensorMax3) {
-    sensorMax4 = flexADC4;
-  }
-
-  if (flexADC5 < sensorMin5) {
-    sensorMin5 = flexADC5;
-  }
-  if (flexADC5 > sensorMax5) {
-    sensorMax5 = flexADC5;
+    sensorMax3 = flexADC3;
   }
 
   if (flexADC4 < sensorMin4) {
@@ -91,10 +84,23 @@ void readMinMax() {
   if (flexADC4 > sensorMax4) {
     sensorMax4 = flexADC4;
   }
+
+  if (flexADC5 < sensorMin5) {
+    sensorMin5 = flexADC5;
+  }
+  if (flexADC4 > sensorMax5) {
+    sensorMax5 = flexADC5;
+  }
 }
 
 // !!! THIS FUNCTION MODIFIES THE flexADC VARIABLES !!!
-void remapFlexValues(){
+void readAndRemapFlexValues(){
+  flexADC1 = analogRead(FLEX_PIN1);
+  flexADC2 = analogRead(FLEX_PIN2);
+  flexADC3 = analogRead(FLEX_PIN3);
+  flexADC4 = analogRead(FLEX_PIN4);
+  flexADC5 = analogRead(FLEX_PIN5);
+
   flexADC1 = map(flexADC1, sensorMin1, sensorMax1, expectedMin, expectedMax);
   flexADC2 = map(flexADC2, sensorMin2, sensorMax2, expectedMin, expectedMax);
   flexADC3 = map(flexADC3, sensorMin3, sensorMax3, expectedMin, expectedMax);
