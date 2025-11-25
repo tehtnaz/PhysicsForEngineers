@@ -125,7 +125,7 @@ void setup() {
 }
 
 
-uint32_t masksOverTime = 0;
+
 unsigned long lastMillis = 0;
 
 
@@ -168,7 +168,11 @@ void loop() {
   Serial.println(accBitMask);
   Serial.println(gyroBitMask);
 
+  Serial.print("MASK:")
   Serial.println(masksOverTime);
+  // Serial.println(output);
+
+
 
   Serial.println("********************************************");
 }

@@ -116,32 +116,32 @@ void readAndRemapFlexValues(){
 // NOTE: the flex values MUST be remapped before this
 // 1024 is the max instead of 1023 because we only check if flexADC < flexMax
 //                             { MIN , MAX , || MIN , MAX , || MIN , MAX , || MIN , MAX , || MIN , MAX  }
-const LetterFlexRange rangeA = { 0   , 100 ,    900 , 1024,    900 , 1024,    900 , 1024,    900 , 1024 };
-const LetterFlexRange rangeB = { 200 , 1024,    0   , 200 ,    0   , 200 ,    0   , 200 ,    0   , 200  };
-const LetterFlexRange rangeC = { 200 , 1024,    0   , 500 ,    0   , 900 ,    0   , 900 ,    0   , 900  };
-const LetterFlexRange rangeD = { 0   , 1024,    0   , 100 ,    800 , 1024,    800 , 1024,    800 , 1024 }; // fix A0
-const LetterFlexRange rangeE = { 900 , 1024,    900 , 1024,    900 , 1024,    900 , 1024,    900 , 1024 };
-const LetterFlexRange rangeF = { 0   , 100 ,    500 , 1024,    0   , 700 ,    0   , 100 ,    0   , 200  };
-const LetterFlexRange rangeG = { 0   , 1024,    0   , 100 ,    800 , 1024,    800 , 1024,    800 , 1024 }; // fix A0
-const LetterFlexRange rangeH = { 0   , 300 ,    500 , 900 ,    500 , 900 ,    900 , 1024,    900 , 1024 };
-const LetterFlexRange rangeI = { 0   , 100 ,    900 , 1024,    900 , 1024,    300 , 1000,    0   , 1024 };
-const LetterFlexRange rangeJ = { 0   , 100 ,    900 , 1024,    900 , 1024,    300 , 1000,    0   , 1024 }; // read from acc aswell
-const LetterFlexRange rangeK = { 0   , 100 ,    0   , 100 ,    0   , 400 ,    0   , 900 ,    900 , 1024 };
-const LetterFlexRange rangeL = { 0   , 300 ,    0   , 100 ,    900 , 1024,    900 , 1024,    900 , 1024 };
-const LetterFlexRange rangeM = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeN = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeO = { 0   , 100 ,    800 , 1024,    900 , 1024,    900 , 1024,    900 , 1024 };
-const LetterFlexRange rangeP = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeQ = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeR = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeS = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeT = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeU = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeV = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeW = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeX = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeY = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
-const LetterFlexRange rangeZ = { 0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024,    0   , 1024 };
+const LetterFlexRange rangeA = { 0   , 100 ,    800 , 2048,    900 , 2048,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeB = { 200 , 2048,    0   , 200 ,    0   , 200 ,    0   , 200 ,    0   , 200  }; // problems
+const LetterFlexRange rangeC = { 0   , 100 ,    0   , 100 ,    0   , 100 ,    0   , 500 ,    0   , 500  }; // all except thumb may be super high or super low
+const LetterFlexRange rangeD = { 900 , 2048,    0   , 100 ,    800 , 2048,    800 , 2048,    800 , 2048 };
+const LetterFlexRange rangeE = { 900 , 2048,    650 , 2048,    900 , 2048,    750 , 2048,    750 , 2048 };
+const LetterFlexRange rangeF = { 0   , 100 ,    500 , 2048,    0   , 700 ,    0   , 100 ,    0   , 200  }; 
+const LetterFlexRange rangeG = { 0   , 100 ,    0   , 100 ,    800 , 2048,    800 , 2048,    800 , 2048 }; 
+const LetterFlexRange rangeH = { 0   , 300 ,    0   , 500 ,    0   , 500 ,    900 , 2048,    900 , 2048 }; 
+const LetterFlexRange rangeI = { 100 , 600 ,    900 , 2048,    900 , 2048,    300 , 1000,    600 , 2048 };
+const LetterFlexRange rangeJ = { 100 , 600 ,    900 , 2048,    900 , 2048,    300 , 1000,    600 , 2048 };
+const LetterFlexRange rangeK = { 0   , 100 ,    0   , 100 ,    0   , 400 ,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeL = { 0   , 900 ,    0   , 100 ,    900 , 2048,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeM = { 900 , 2048,    700 , 2048,    900 , 2048,    700 , 2048,    700 , 2048 };
+const LetterFlexRange rangeN = { 900 , 2048,    600 , 2048,    900 , 2048,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeO = { 0   , 100 ,    900 , 2048,    900 , 2048,    600 , 100 ,    600 , 100  }; // problems
+const LetterFlexRange rangeP = { 600 , 2048,    0   , 100 ,    900 , 2048,    0   , 100 ,    0   , 100  }; // needs acc MUST USE ACC
+const LetterFlexRange rangeQ = { 0   , 100 ,    0   , 100 ,    700  ,2048 ,    600 , 2048,    600 , 2048 }; // needs acc
+const LetterFlexRange rangeR = { 0   , 900 ,    0 ,   100 ,    500 , 2048,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeS = { 900 , 2048,    900 , 2048,    900 , 2048,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeT = { 900 , 2048,    0   , 100 ,    900 , 2048,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeU = { 0   , 100 ,    0   , 100 ,    0   , 100 ,    900 , 1000,    900 , 2048 };
+const LetterFlexRange rangeV = { 0   , 100 ,    0   , 100 ,    0   , 100 ,    100 , 2048,    900 , 2048 };
+const LetterFlexRange rangeW = { 0   , 100 ,    0   , 100 ,    0   , 100 ,    0   , 100 ,    900 , 2048 };
+const LetterFlexRange rangeX = { 0   , 100 ,    0   , 100 ,    900 , 2048,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeY = { 0   , 100 ,    700 , 2048,    900 , 2048,    900 , 2048,    900 , 2048 };
+const LetterFlexRange rangeZ = { 0   , 2048,    0   , 100 ,    900 , 2048,    700 , 2048,    900 , 2048 };
 
 bool doesSensorMatchLetterFlex(LetterFlexRange letterRange){
   return flexADC1 < letterRange.flexMax1 && flexADC1 >= letterRange.flexMin1 &&
@@ -189,9 +189,11 @@ bool doesSensorMatchLetterGyro(LetterXYZRange letterXYZRange){
 // ************************************
 // * Letter finders
 // ************************************
-uint32_t letterBitMask;
-uint32_t accBitMask;
-uint32_t gyroBitMask;
+uint32_t letterBitMask = 0;
+uint32_t accBitMask = 0;
+uint32_t gyroBitMask = 0;
+uint32_t masksOverTime = 0;
+// char output[32] = "";
 
 void matchLetterWithFlex(){
   letterBitMask = 0;
@@ -282,6 +284,8 @@ void matchLetterWithAcc(){
   if(doesSensorMatchLetterAcceleration(accRangeNormal)){
     // all except G and H
     accBitMask |= ~(((uint32_t)1 << 6) + ((uint32_t)1 << 7));
+  }else{
+    accBitMask |= (uint32_t)1 << 25;
   }
   if(doesSensorMatchLetterAcceleration(accRangeG)){
     accBitMask |= (uint32_t)1 << 6;
@@ -296,10 +300,10 @@ void matchLetterWithGyro(){
 
   if(doesSensorMatchLetterGyro(gyrRangeNormal)){
     // all except letter J
-    gyroBitMask = ~((uint32_t)1 << 9);
+    gyroBitMask = ~((uint32_t)1 << 8);
   }else{
     // letter J
-    gyroBitMask |= (uint32_t)1 << 9;
+    gyroBitMask |= (uint32_t)1 << 8;
   }
 }
 
@@ -311,3 +315,93 @@ uint32_t matchAllMasks(){
   matchLetterWithGyro();
   return letterBitMask & accBitMask & gyroBitMask;
 }
+
+bool fieldContainsBit(uint32_t bit){
+  return (masksOverTime & bit) != 0;
+}
+
+// String matchLetterToField(){
+//   output = "letters: ";
+
+//   output.concat("Aawd");
+//   output.concat("Aawdljnk");
+
+//   if(fieldContainsBit((uint32_t)1 << 0)){
+//     output.concat("A");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 1)){
+//     output.concat("B");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 2)){
+//     output.concat("C");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 3)){
+//     output.concat("D");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 4)){
+//     output.concat("E");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 5)){
+//     output.concat("F");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 6)){
+//     output.concat("G");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 7)){
+//     output.concat("H");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 8)){
+//     output.concat("I");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 9)){
+//     output.concat("J");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 10)){
+//     output.concat("K");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 11)){
+//     output.concat("L");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 12)){
+//     output.concat("M");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 13)){
+//     output.concat("N");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 14)){
+//     output.concat("O");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 15)){
+//     output.concat("P");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 16)){
+//     output.concat("Q");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 17)){
+//     output.concat("R");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 18)){
+//     output.concat("S");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 19)){
+//     output.concat("T");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 20)){
+//     output.concat("U");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 21)){
+//     output.concat("V");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 22)){
+//     output.concat("W");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 23)){
+//     output.concat("X");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 24)){
+//     output.concat("Y");
+//   }
+//   if(fieldContainsBit((uint32_t)1 << 25)){
+//     output.concat("Z");
+//   }
+// }
