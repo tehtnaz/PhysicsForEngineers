@@ -165,7 +165,7 @@ void GetMPU7600Data(){
 }
 
 
-const LetterXYZRange accRangeNormal = {xyzFloat(-100.0f, -0.5f, -0.5f), xyzFloat(-1.0f, 0.5f, 0.5f)};
+const LetterXYZRange accRangeNormal = {xyzFloat(-100.0f, -0.9f, -1.0f), xyzFloat(-1.0f, 0.9f, 1.0f)};
 
 const LetterXYZRange accRangeG = {xyzFloat(-1.0f, -1.0f, -100.0f), xyzFloat(-0.5f, -0.5f, 100.0f)};
 const LetterXYZRange accRangeH = {xyzFloat(-1.0f, -1.0f, -100.0f), xyzFloat(-0.5f, -0.5f, 100.0f)};
