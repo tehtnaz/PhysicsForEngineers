@@ -168,8 +168,9 @@ void loop() {
   Serial.println(accBitMask);
   Serial.println(gyroBitMask);
 
-  Serial.print("MASK:")
-  Serial.println(masksOverTime);
+  Serial.print("MASK:");
+  Serial.print(masksOverTime);
+  Serial.println("//");
   // Serial.println(output);
 
 
