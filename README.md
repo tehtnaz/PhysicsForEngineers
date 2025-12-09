@@ -1,6 +1,11 @@
 # PhysicsForEngineers
+## ASL Glove project
 
-ASL Glove project
+This is the code uploaded to the arduino. It reads the analog values from the pressure sensors and determines which letters are being signed, then sends the result through the serial connection (connected to the bluetooth module).
+1. The glove goes through a calibration step, storing the maximum and minimum range of values
+2. The glove constantly matches the sensor data (pressure sensor and accelerometer) to a letter(s) and stores the possibilities as a bitmask
+3. The data from each frame is added to the next frame (bitwise OR) for one second
+4. The data obtained over that second is sent through bluetooth
 
 PhysicsForEngineers.ino is the main file, Runner.ino is appended onto it during compilation.
 - PhysicsForEngineers.ino: File that holds calibration functions, temporary stored values, calibrated ranges for each letter, and bitmask builder.
