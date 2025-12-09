@@ -11,6 +11,7 @@ This is the code uploaded to the arduino. It reads the analog values from the pr
 PhysicsForEngineers.ino is the main file, Runner.ino is appended onto it during compilation.
 - PhysicsForEngineers.ino: File that holds calibration functions, temporary stored values, calibrated ranges for each letter, and bitmask builder.
 - Runner.ino: Has setup & loop functions which initialize the calibration for MPU6500 and flex sensors, then constantly updates sensor values and outputs data
+- structs.h: A file containing a couple structs to make storing the accepted range of values for each letter easier
 
 Members:
 - Jase Beaumont
