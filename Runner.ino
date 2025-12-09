@@ -1,19 +1,14 @@
 /*************************************
 * This file is appended after PhysicsForEngineers.ino
 * This file will use functions from before to get the letters, then wil write it to the Bluetooth.
-* This will also ocntain the setup / loop functions
+* This will also contain the setup / loop functions
 *************************************/
 
 /***************************************************************************
-* Example sketch for the MPU6500_WE library
+* This file uses code from the example for the MPU6500_WE library
 *
-* This sketch shows how to get acceleration, gyroscocope and temperature 
-* data from the MPU6500 using SPI.
-* 
-* For further information visit my blog:
-*
-* https://wolles-elektronikkiste.de/mpu9250-9-achsen-sensormodul-teil-1  (German)
-* https://wolles-elektronikkiste.de/en/mpu9250-9-axis-sensor-module-part-1  (English)
+* The author's blog is here
+* https://wolles-elektronikkiste.de/en/mpu9250-9-axis-sensor-module-part-1
 * 
 ***************************************************************************/
 
@@ -95,6 +90,7 @@ void setup() {
   Serial.println(sensorMax4);
   Serial.print("5: ");
   Serial.println(sensorMax5);
+
   bool sensorFatal = false;
   if(sensorMin1 == sensorMax1){
     Serial.println("ERROR - FATAL: NO INPUT detected on Thumb (A0)!");
@@ -130,6 +126,7 @@ unsigned long lastMillis = 0;
 
 
 void loop() {
+  // over the course of one second, add all possibilities of letters we obtained during each check
   lastMillis = millis();
   masksOverTime = 0;
   while(millis() < (lastMillis + 1000)){
@@ -137,6 +134,8 @@ void loop() {
     readAndRemapFlexValues();
     masksOverTime |= matchAllMasks();
   }
+
+  // output debug info
 
   Serial.println("Acceleration in g (x,y,z):");
   Serial.print(gValue.x);
@@ -163,17 +162,16 @@ void loop() {
   Serial.print("5: ");
   Serial.println(flexADC5);
 
-
+  // output data
   Serial.println(letterBitMask);
   Serial.println(accBitMask);
   Serial.println(gyroBitMask);
 
+  // output data to be parsed by the android app
   Serial.print("MASK:");
   Serial.print(masksOverTime);
   Serial.println("//");
-  // Serial.println(output);
 
-
-
+  // message delimiter
   Serial.println("********************************************");
 }

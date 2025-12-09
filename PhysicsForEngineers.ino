@@ -50,6 +50,7 @@ int sensorMin5 = 1023;    // HIGHEST resistance in range
 int sensorMax5 = 0;       // LOWEST resistance in range
 
 // Calibrates the min/max range of flex sensors. To be run several times for 10 secs during startup
+// Assigns maximum and minimum value that can be read from the flex sensor
 void calibrateMinMax() {
   flexADC1 = analogRead(FLEX_PIN1);
   flexADC2 = analogRead(FLEX_PIN2);
@@ -114,7 +115,7 @@ void readAndRemapFlexValues(){
 
 // Expected range of values for each letter
 // NOTE: the flex values MUST be remapped before this
-// 1024 is the max instead of 1023 because we only check if flexADC < flexMax
+// 2048 is the max instead of 1023 because we only check if flexADC < flexMax, so if we overshoot we don't wanna omit that data.
 //                             { MIN , MAX , || MIN , MAX , || MIN , MAX , || MIN , MAX , || MIN , MAX  }
 const LetterFlexRange rangeA = { 0   , 100 ,    800 , 2048,    900 , 2048,    900 , 2048,    900 , 2048 };
 const LetterFlexRange rangeB = { 200 , 2048,    0   , 200 ,    0   , 200 ,    0   , 200 ,    0   , 200  }; // problems
@@ -309,6 +310,7 @@ void matchLetterWithGyro(){
 
 // could replace each (uint)1 << x with #DEFINEs for each letter, but that's a little more messy
 
+// get mask that combines all possibilities, if each mask matches (AND)
 uint32_t matchAllMasks(){
   matchLetterWithFlex();
   matchLetterWithAcc();
@@ -316,92 +318,7 @@ uint32_t matchAllMasks(){
   return letterBitMask & accBitMask & gyroBitMask;
 }
 
+// Utility function to check if bit is enabled, unused in the final version
 bool fieldContainsBit(uint32_t bit){
   return (masksOverTime & bit) != 0;
 }
-
-// String matchLetterToField(){
-//   output = "letters: ";
-
-//   output.concat("Aawd");
-//   output.concat("Aawdljnk");
-
-//   if(fieldContainsBit((uint32_t)1 << 0)){
-//     output.concat("A");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 1)){
-//     output.concat("B");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 2)){
-//     output.concat("C");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 3)){
-//     output.concat("D");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 4)){
-//     output.concat("E");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 5)){
-//     output.concat("F");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 6)){
-//     output.concat("G");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 7)){
-//     output.concat("H");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 8)){
-//     output.concat("I");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 9)){
-//     output.concat("J");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 10)){
-//     output.concat("K");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 11)){
-//     output.concat("L");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 12)){
-//     output.concat("M");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 13)){
-//     output.concat("N");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 14)){
-//     output.concat("O");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 15)){
-//     output.concat("P");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 16)){
-//     output.concat("Q");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 17)){
-//     output.concat("R");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 18)){
-//     output.concat("S");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 19)){
-//     output.concat("T");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 20)){
-//     output.concat("U");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 21)){
-//     output.concat("V");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 22)){
-//     output.concat("W");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 23)){
-//     output.concat("X");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 24)){
-//     output.concat("Y");
-//   }
-//   if(fieldContainsBit((uint32_t)1 << 25)){
-//     output.concat("Z");
-//   }
-// }
